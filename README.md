@@ -1,2 +1,8 @@
 # socket-chat
-dingdingding
+
+***
+
+a chat webpage
+
+implement with *socket.io*, *express*
+

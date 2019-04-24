@@ -3,38 +3,10 @@ const app = express()
 const http = require('http')
 const server = http.createServer(app)
 const io = require('socket.io')(server)
-
-//channel
-class Channel {
-    constructor(roomname) {
-        this.roomname = roomname || '/'
-        this.user_count = 0
-        this.users = []
-        this.init()
-    }
-
-    init() {
-        const roomname = this.roomname
-        const room = io.of(roomname)
-        room.on('connection', (socket) => {
-            console.log('an user entered in: ' + roomname)
-            this.user_count += 1
-            room.emit('count', this.user_count)
-            socket.on('chat_message', ({ username, msg }) => {
-                console.log('received: ' + msg)
-                socket.broadcast.emit('chat_message', ({ username, msg }))
-            })
-            socket.on('disconnect', () => {
-                console.log('user disconnected')
-                this.user_count -= 1
-                room.emit('count', this.user_count)
-            })
-        })
-    }
-}
+const Channel = require('./channel.js')
 const channels = []
 
-const channel_a = new Channel()
+const channel_a = new Channel(io)
 
 app.use(express.static('./public/'))
 app.use((req, res, next) => {

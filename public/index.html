@@ -75,15 +75,18 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-    const socket = io()
     const username = prompt('please input your name?', 'random')
-    $('form').submit(e => {
-        e.preventDefault()
-        const msg = $('#m').val()
-        socket.emit('chat_message', { username, msg })
-        $('#messages').append($('<li class="self">').text(username + ': ' + msg))
-        $('#m').val('');
-        return false
+    const socket = io({
+        query: {
+            username
+        }
+    })
+    socket.on('connect', () => {
+        console.log('connected!')
+    })
+
+    socket.on('disconnect', () => {
+        console.log('disconnected!')
     })
 
     socket.on('count', (count) => {
@@ -92,6 +95,15 @@
 
     socket.on('chat_message', ({ username, msg }) => {
         $('#messages').append($('<li>').text(username + ': ' + msg))
+    })
+
+    $('form').submit(e => {
+        e.preventDefault()
+        const msg = $('#m').val()
+        socket.emit('chat_message', msg)
+        $('#messages').append($('<li class="self">').text(username + ': ' + msg))
+        $('#m').val('');
+        return false
     })
     </script>
 </body>
