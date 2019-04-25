@@ -1,6 +1,7 @@
 const express = require('express')
-const app = express()
 const http = require('http')
+const app = express()
+
 const server = http.createServer(app)
 const io = require('socket.io')(server)
 const Channel = require('./channel.js')
@@ -8,7 +9,7 @@ const channels = []
 
 const channel_a = new Channel(io)
 
-app.use(express.static('./public/'))
+app.use(express.static('./public/dist/'))
 app.use((req, res, next) => {
     res.status(404).send('404')
     next()
