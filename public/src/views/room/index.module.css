@@ -1,0 +1,64 @@
+@value colors: '../../index.css';
+@value primary, secondary, thirdary, forthary from colors;
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: forthary;
+    position: relative;
+    padding-top: 20px;
+}
+
+.messages {
+    flex: 1;
+    padding: 10px;
+    overflow: auto;
+}
+
+.tip_count{
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    color: primary;
+}
+
+.username {
+    font-weight: bold;
+    display: block;
+    line-height: 2;
+    font-size: 16px;
+    color: thirdary;
+}
+
+
+.msg_self,
+.msg_other{
+    color: secondary;
+}
+
+.msg_self {
+    text-align: right;
+}
+
+.msg_other {
+    text-align: left;
+}
+
+.bottom {
+    display: flex;
+    height: 40px;
+}
+
+.input_box {
+    font-size: 20px;
+    flex: 1;
+}
+
+.btn_send {
+    padding: 0 20px;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    color: primary;
+    background-color: secondary;
+}

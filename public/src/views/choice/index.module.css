@@ -1,0 +1,24 @@
+@value colors: '../../index.css';
+@value primary,secondary from colors;
+
+.wrapper {
+    height: 100vh;
+    background-color: primary;
+}
+
+.input {
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    outline: none;
+    font-size: 20px;
+    line-height: 1.5;
+    color: primary;
+    text-indent: 5px;
+    background-color: secondary;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    primary;
+}

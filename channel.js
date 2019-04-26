@@ -13,9 +13,6 @@ class Channel {
         this.init()
     }
 
-    get user_count() {
-        return this.users.length
-    }
 
     init() {
         const io = this.io
@@ -34,8 +31,8 @@ class Channel {
             const username = socket.username
             const mark_index = this.users.length
             this.users.push(username)
-            console.log('an user entered in: ' + roomname)
-            room.emit('count', this.user_count)
+            console.log(username + ' entered in: ' + roomname)
+            room.emit('users_online', this.users)
             socket.on('chat_message', (msg) => {
                 console.log('received: ' + msg)
                 socket.broadcast.emit('chat_message', ({ username, msg }))
@@ -43,7 +40,7 @@ class Channel {
             socket.on('disconnect', () => {
                 console.log('user disconnected')
                 this.users.splice(mark_index, 1)
-                room.emit('count', this.user_count)
+                room.emit('users_online', this.users)
             })
         })
     }
