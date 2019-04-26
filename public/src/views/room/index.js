@@ -34,7 +34,6 @@ export default function Choice(props) {
         })
 
         socket.on('chat_message', (info) => {
-            console.log(info)
             set_messages(messages =>
                 ([...messages, { ...info, msg_id: messages.length }]))
         })
